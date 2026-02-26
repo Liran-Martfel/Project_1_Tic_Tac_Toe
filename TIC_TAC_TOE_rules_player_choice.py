@@ -29,12 +29,13 @@ def game_options():
     choose.lower()
     if choose == 'r':
         print ('loading....')
-        time.sleep (0.5)
+        time.sleep (1)
         print (rules)
     else:
         pass
 
 def player_pick():
+    time.sleep (0.5)
     player_1: str= (input(f'{player_1_name}, please pick your mark:\npress X for X or O for O: '))
     player_1.lower()
     if player_1 == 'x':
