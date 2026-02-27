@@ -1,15 +1,3 @@
-#mission to success:
-#1. ask the player if he would like to be an X or an O✅.
-#1.1 show players what they are (X or O)✅
-#1.2 make the rules✅
-#1.3 make an option to show the rules✅
-#2. show the board - 3 by 3.
-#3. each player pick a spot
-#3.1 checking for illegal moves.
-#3.2 having a delay of 0.5 till showing the new board with the pick.
-#3.3 in case of a draw, keep the option to reset or quit the game.
-#4. checking for a winner. if there is. print it nicely.
-#4.1 make a score board.
 import time
 
 print ('welcome to the game of Tic Tac Toe❌⭕️\nThe game was made by: Liran Martefl\nI Hope you enjoy😇\n')
@@ -56,3 +44,29 @@ rules = game_rules()
 game_options()
 player_picking = player_pick()
 
+def board():
+    game_board: list = [' 1','2','3',
+                        ' 4','5','6',
+                        ' 7','8','9']
+    for row in range(len(game_board)):
+        print(game_board[row],end= ' ')
+        match row:
+            case 2 | 5:
+                    print()
+                    print ('----+------+----')
+            case 8:
+                print()
+            case _:
+                print(' | ',end= ' ')
+    return game_board
+
+board_of_game = board()
+
+def pick_spot():
+    while player_pick == 'x':
+        player_1_action: int = int(input('What is your move? press the number you want to replace: '))
+        if player_1_action in board_of_game:
+            board_of_game[player_1_action] = '❌'
+        else:
+            print ('the place is taken🥲')
+        break

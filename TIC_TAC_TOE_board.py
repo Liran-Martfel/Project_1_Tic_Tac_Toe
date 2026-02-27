@@ -1,31 +1,26 @@
-#import TIC_TAC_TOE_rules_player_choice
+def board():
+    game_board: list = [' 1','2','3',
+                        ' 4','5','6',
+                        ' 7','8','9']
+    for row in range(len(game_board)):
+        print(game_board[row],end= ' ')
+        match row:
+            case 2 | 5:
+                    print()
+                    print ('----+------+----')
+            case 8:
+                print()
+            case _:
+                print(' | ',end= ' ')
+    return game_board
 
-#def board():
-game_board: list = [' 1',' 2',' 3',
-                    ' 4',' 5',' 6',
-                    ' 7',' 8',' 9']
-for row in range(len(game_board)):
-    match row:
-        case 0:
-            game_board[row] = ' 1'
-        case 1:
-            game_board[row] = ' 2'
-        case 2:
-            game_board[row] = ' 3'
-        case 3:
-            print()
-            print ('----+-----+-----')
-            game_board[row] = ' 4'
-        case 4:
-            game_board[row] = ' 5'
-        case 5:
-            game_board[row] = ' 6'
-        case 6:
-            print()
-            print ('----+-----+-----')
-            game_board[row] = ' 7'
-        case 7:
-            game_board[row] = ' 8'
-        case 8:
-            game_board[row] = ' 9'
-    print(game_board[row],end ='  | ')
+board_of_game = board()
+
+def pick_spot():
+    while player_pick == 'x':
+        player_1_action: int = int(input('What is your move? press the number you want to replace: '))
+        if player_1_action in board_of_game:
+            board_of_game[player_1_action] = '❌'
+        else:
+            print ('the place is taken🥲')
+        break
