@@ -1,13 +1,18 @@
+#putting the board outside of the def so that the board won't get reset everytime the players play
+
+game_board: list = [' 1', '2', '3',
+                    ' 4', '5', '6',
+                    ' 7', '8', '9']
+
+#rules of the board print
+
 def board():
-    game_board: list = [' 1','2','3',
-                        ' 4','5','6',
-                        ' 7','8','9']
     for row in range(len(game_board)):
         print(game_board[row],end= ' ')
         match row:
             case 2 | 5:
                     print()
-                    print ('----+------+----')
+                    print ('----+-----+----')
             case 8:
                 print()
             case _:
@@ -16,11 +21,19 @@ def board():
 
 board_of_game = board()
 
-def pick_spot():
-    while player_pick == 'x':
-        player_1_action: int = int(input('What is your move? press the number you want to replace: '))
-        if player_1_action in board_of_game:
-            board_of_game[player_1_action] = '❌'
-        else:
-            print ('the place is taken🥲')
-        break
+#players pick their spot to play :)
+
+def pick_spot(sign):
+        #each player move
+        while True:
+            player_action: int = int(input('player, What is your move? press the number you want to replace: '))
+            if board_of_game[player_action - 1] != '❌' and board_of_game[player_action - 1] != '⭕️':
+                board_of_game[player_action - 1] = sign
+                board()
+                break
+            else:
+                print ('the place is taken🥲')
+                continue
+
+pick_spot(player_picking[0])
+pick_spot(player_picking[1])

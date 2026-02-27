@@ -1,8 +1,13 @@
 import time
 
+#Welcome message
+
 print ('welcome to the game of Tic Tac Toe❌⭕️\nThe game was made by: Liran Martefl\nI Hope you enjoy😇\n')
 player_1_name = input('What is the name of the first player? ')
 player_2_name = input('What is the name of the second player? ')
+
+
+#showing the rules of the game to the players if they choose to
 
 def game_rules():
     rules_of_game =  (f'Hello {player_1_name} and {player_2_name} Nice to meet you!😊 the rules of the game are:\n{'*'*40}'
@@ -13,15 +18,19 @@ def game_rules():
               f'\n5. You need to press the number in order to replace him and pick the spot\n')
     return rules_of_game
 
+#player's choosing options
+
 def game_options():
     choose:str = (input('You can see the rules of the game by pressing "r", or to start play by pressing "p":\n'))
-    choose.lower()
+    choose = choose.lower()
     if choose == 'r':
         print ('loading....')
         time.sleep (1)
         print (rules)
     else:
         pass
+
+#first player pick up what mark he wants, then continue
 
 def player_pick():
     time.sleep (0.5)
@@ -44,16 +53,21 @@ rules = game_rules()
 game_options()
 player_picking = player_pick()
 
+#putting the board outside of the def so that the board won't get reset everytime the players play
+
+game_board: list = [' 1', '2', '3',
+                    ' 4', '5', '6',
+                    ' 7', '8', '9']
+
+#rules of the board print
+
 def board():
-    game_board: list = [' 1','2','3',
-                        ' 4','5','6',
-                        ' 7','8','9']
     for row in range(len(game_board)):
         print(game_board[row],end= ' ')
         match row:
             case 2 | 5:
                     print()
-                    print ('----+------+----')
+                    print ('----+-----+----')
             case 8:
                 print()
             case _:
@@ -62,11 +76,21 @@ def board():
 
 board_of_game = board()
 
-def pick_spot():
-    while player_pick == 'x':
-        player_1_action: int = int(input('What is your move? press the number you want to replace: '))
-        if player_1_action in board_of_game:
-            board_of_game[player_1_action] = '❌'
-        else:
-            print ('the place is taken🥲')
-        break
+#players pick their spot to play :)
+
+def pick_spot(sign):
+        #each player move
+        while True:
+            player_action: int = int(input('player, What is your move? press the number you want to replace: '))
+            if board_of_game[player_action - 1] != '❌' and board_of_game[player_action - 1] != '⭕️':
+                board_of_game[player_action - 1] = sign
+                board()
+                break
+            else:
+                print ('the place is taken🥲')
+                continue
+
+pick_spot(player_picking[0])
+pick_spot(player_picking[1])
+
+

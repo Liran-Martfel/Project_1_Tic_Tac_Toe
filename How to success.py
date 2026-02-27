@@ -5,6 +5,7 @@
 #1.3 make an option to show the rules✅
 #2. show the board - 3 by 3.✅
 #3. each player pick a spot
+#3.01 show the result of the board after picking
 #3.1 checking for illegal moves.
 #3.2 having a delay of 0.5 till showing the new board with the pick.
 #3.3 in case of a draw, keep the option to reset or quit the game.
