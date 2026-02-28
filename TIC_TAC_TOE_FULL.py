@@ -24,7 +24,7 @@ def game_options():
     choose:str = (input('You can see the rules of the game by pressing "r", or to start play by pressing "p":\n'))
     choose = choose.lower()
     if choose == 'r':
-        print ('loading....')
+        print (f'loading....')
         time.sleep (1)
         print (rules)
     else:
@@ -53,7 +53,7 @@ rules = game_rules()
 game_options()
 player_picking = player_pick()
 
-#putting the board outside of the def so that the board won't get reset everytime the players play
+#putting the board outside the def so that the board won't get reset everytime the players play
 
 game_board: list = [' 1', '2', '3',
                     ' 4', '5', '6',
@@ -76,6 +76,7 @@ def board():
 
 board_of_game = board()
 
+
 #players pick their spot to play :)
 
 def pick_spot(sign):
@@ -88,11 +89,12 @@ def pick_spot(sign):
                     if board_of_game[player_action - 1] != '❌' and board_of_game[player_action - 1] != '⭕️':
                         board_of_game[player_action - 1] = sign
                         board()
-                        break
+                        return sign
                     else:
-                        print ('the place is taken🥲')
+                        print ('this place is taken🥲')
                         continue
         return player_action
+
 
 pick_spot(player_picking[0])
 pick_spot(player_picking[1])
@@ -103,12 +105,62 @@ def play_flow():
     player_action = []
     while len(player_action) < 9:
         pick_spot(player_picking[0])
+        if winning_by_row(player_picking[0]):
+            print (f'{player_1_name} is the winner!')
+        elif winning_by_col(player_picking[0]):
+            print (f'{player_1_name} is the winner!')
+            break
+        else:
+            pass
         player_action.append(player_picking[0])
         if len(player_action) == 9:
             break
         pick_spot(player_picking[1])
+        if winning_by_row(player_picking[1]):
+            print (f'{player_2_name} is the winner!')
+        elif winning_by_col(player_picking[1]):
+            print (f'{player_2_name} is the winner!')
+            break
+        else:
+            pass
         player_action.append(player_picking[1])
         if len(player_action) == 9:
             break
 
+
+def winning_by_row(sign):
+    sign_for_winning = [sign,sign,sign]
+    if board_of_game [0:3] == sign_for_winning:
+        print ('winner!')
+        return True
+
+    if board_of_game [3:6] == sign_for_winning:
+        print ('winner!')
+        return True
+
+    if board_of_game [6::] == sign_for_winning:
+        print ('winner!')
+        return True
+    else:
+        return False
+
+winning_by_row(board_of_game)
+
+def winning_by_col(sign):
+    sign_for_winning = [sign,sign,sign]
+    if board_of_game [0:9:3] == sign_for_winning:
+        print ('winner!')
+        return True
+
+    if board_of_game [1:9:3] == sign_for_winning:
+        print ('winner!')
+        return True
+
+    if board_of_game [2:9:3] == sign_for_winning:
+        print ('winner!')
+        return True
+    else:
+        return False
+
+winning_by_col(board_of_game)
 play_flow()
