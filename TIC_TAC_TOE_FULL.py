@@ -110,6 +110,9 @@ def play_flow():
         elif winning_by_col(player_picking[0]):
             print (f'{player_1_name} is the winner!')
             break
+        elif winning_by_diagonal(player_picking[0]):
+            print (f'{player_1_name} is the winner!')
+            break
         else:
             pass
         player_action.append(player_picking[0])
@@ -148,19 +151,29 @@ winning_by_row(board_of_game)
 
 def winning_by_col(sign):
     sign_for_winning = [sign,sign,sign]
-    if board_of_game [0:9:3] == sign_for_winning:
+    if board_of_game [0::3] == sign_for_winning:
         print ('winner!')
         return True
 
-    if board_of_game [1:9:3] == sign_for_winning:
+    if board_of_game [1::3] == sign_for_winning:
         print ('winner!')
         return True
 
-    if board_of_game [2:9:3] == sign_for_winning:
+    if board_of_game [2::3] == sign_for_winning:
         print ('winner!')
         return True
     else:
         return False
 
 winning_by_col(board_of_game)
+
+def winning_by_diagonal(sign):
+    sign_for_winning = [sign,sign,sign]
+    if board_of_game [0::4] == sign_for_winning or board_of_game [2:7:2] == sign_for_winning:
+        print ('winner!')
+        return True
+    else:
+        return False
+
+winning_by_diagonal(board_of_game)
 play_flow()
