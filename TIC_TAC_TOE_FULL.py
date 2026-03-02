@@ -79,7 +79,6 @@ while True:
                 case _:
                     print(' | ',end= ' ')
         return game_board
-
     board_of_game = board()
 
 
@@ -122,9 +121,15 @@ while True:
                 print (f'{player_2_name} is the winner🥳')
                 counter_of_wins[1] += 1
                 return counter_of_wins
-            elif draw():
+
+            #letting the game_flow know that we sent him a reset option, if True, send it out.
+            if_reset = draw()
+            if if_reset == 'reset':
+                return 'reset'
+            elif if_reset == True:
                 print ('its a draw🤝🏼')
                 break
+
 
     def winning_by_row(sign):
         sign_for_winning = [sign,sign,sign]
@@ -150,6 +155,7 @@ while True:
             return False
     winning_by_diagonal(board_of_game)
 
+#draw play and reset mid_game
     def draw():
         winning_ways = [
             #row
@@ -162,11 +168,28 @@ while True:
         for path in winning_ways:
             if player_picking[0] in path and player_picking[1] in path:
                 cant_win += 1
+
+                #reset_mid_game
+                if cant_win == 5:
+                    asking_for_reset = input('would you like to reset the game? (y/n): ')
+                    if asking_for_reset == 'y':
+                        print ('restarting the game....')
+                        time.sleep(0.5)
+                        for i in range(9):
+                            game_board[i] = _board_[i]
+                        board()
+                        #returning reset for game_flow
+                        return 'reset'
+                    else:
+                        continue
         if cant_win == 8:
             return True
         return False
     draw()
     play_flow()
+    #checking if game_flow returned reset, if it did, we continue like nothing happend
+    if play_flow() == 'reset':
+        continue
 
     print (f'{orange}the score is:\nplayer 1: {counter_of_wins[0]}\nplayer 2: {counter_of_wins[1]}')
     restart = input(f'Do you want to play again? press (y/n): {reset_color}')
@@ -176,7 +199,7 @@ while True:
         if counter_of_wins[0] > counter_of_wins[1]:
             print(f'The winner is: {player_1_name}🎉🥇🎉')
         elif counter_of_wins[1] == counter_of_wins[0]:
-            print(f'ITS a draw! 🤝🏼 good job! ')
+            print(f'Its a draw! 🤝🏼 good job! ')
         else:
             print(f'The winner is: {player_2_name}🎉🥇🎉')
         break
