@@ -12,8 +12,8 @@
 #3.3 in case of a draw, keep the option to reset or quit the game.
 #4. checking for a winner✅. if there is. print it nicely.
 #4.1 make a score board.
-#4.2 add a reset option after 5 turns.
-
+#4.2 add a reset option after 5 turns✅.
+#4.3 draw and
 
 ########### in the main menu, add an option to play agenst human for 1, or against computer press 2 (randomly - bonus number 2)
 

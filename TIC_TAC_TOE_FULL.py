@@ -25,7 +25,7 @@ def game_rules():
 #player's choosing options
 
 def game_options():
-    choose:str = (input('To see the rules of the game press "1"\nfor Player vs Player press "2"\nfor Player vs Computer press "3"\n'))
+    choose:str = (input(f'Hey {player_1_name}, Those are your options:\nTo see the rules of the game press "1"\nfor Player vs Player press "2"\nTo exit press "3"\n'))
     choose = choose.lower()
     if choose == '1':
         print (f'{light_purple}loading....{reset_color}')
@@ -44,6 +44,9 @@ counter_of_wins = [0,0]
 while True:
     game_board = _board_.copy()
     choice = game_options()
+    if choice == '3':
+        print ('Thank you for playing, good bye!')
+        break
     if choice == '1':
         continue
     elif choice == '2':
@@ -182,23 +185,24 @@ while True:
                 if player_picking[0] in path and player_picking[1] in path:
                     cant_win += 1
 
-                    #reset_mid_game
-                    if cant_win == 5:
-                        asking_for_reset = input('would you like to reset the game? (y/n): ')
-                        if asking_for_reset == 'y':
-                            print ('restarting the game....')
-                            time.sleep(0.5)
-                            for i in range(9):
-                                game_board[i] = _board_[i]
-                            board()
-                            #returning reset for game_flow
-                            return 'reset'
-                        else:
-                            continue
+                #reset_mid_game
+                if cant_win == 5:
+                    asking_for_reset = input('would you like to reset the game? (y/n): ')
+                    if asking_for_reset == 'y':
+                        print ('restarting the game....')
+                        time.sleep(0.5)
+                        for i in range(9):
+                            game_board[i] = _board_[i]
+                        board()
+                        #returning reset for game_flow
+                        return 'reset'
+                    else:
+                        continue
             if cant_win == 8:
                 return True
-            return False
-        draw()
+            else:
+                return False
+
         #checking if game_flow returned reset, if it did, we continue like nothing happened
         if play_flow() == 'reset':
             continue
@@ -210,48 +214,12 @@ while True:
             print(f'Thank you for playing!')
             if counter_of_wins[0] > counter_of_wins[1]:
                 print(f'The winner is: {player_1_name}🎉🥇🎉')
+                break
             elif counter_of_wins[1] == counter_of_wins[0]:
                 print(f'Its a draw! 🤝🏼 good job! ')
+                break
             else:
                 print(f'The winner is: {player_2_name}🎉🥇🎉')
-            break
+                break
         else:
             continue
-
-#Bonus - Player Vs Computer
-    # elif choice == '3':
-    #     counter_of_wins = [0, 0]
-    #     _board_ = [' 1', '2', '3',
-    #                ' 4', '5', '6',
-    #                ' 7', '8', '9']
-    #     computer_sign = random.choice(['❌', '⭕️'])
-    #     if computer_sign == '⭕️':
-    #         player = '❌'
-    #         print(f'{player_1_name} you are playing ❌ the computer is playing: {computer_sign}')
-    #     else:
-    #         player = '⭕️'
-    #         print(f'{player_1_name} you are playing ⭕️ the computer is playing: {computer_sign}')
-    #     turn = random.choice(['player', 'computer'])
-        # def computer_move():
-        #     free_space = []
-        #     for i in range (len(board_of_game)):
-        #         if board_of_game[i].strip().isdigit():
-        #             free_space.append(i)
-        #     if free_space:
-        #         return random.choice(free_space)
-        #     return None
-        #
-        # while True:
-        #     if turn == 'player':
-        #         PVC_action = input(f'{player_1_name}, What is your move? press the number you want to replace: ')
-        #         pvc_action = int(PVC_action)
-        #         board_of_game[pvc_action - 1] = player
-        #         board(board_of_game)
-        #         turn = 'computer'
-        #     else:
-        #         print('Computer is thinking....')
-        #         time.sleep(1)
-        #         move = computer_move()
-        #         board_of_game[move] = computer_sign
-        #         board(board_of_game)
-        #         turn = 'player'
