@@ -10,8 +10,8 @@ reset_color = '\033[0m'
 print (f'{light_purple}welcome to the game of Tic Tac Toe \nThe game was made by: Liran Martefl\nI Hope you enjoy😇\n')
 player_1_name = input(f'{reset_color}What is your name? ')
 player_2_name = None
-#showing the rules of the game to the players if they choose to
 
+#showing the rules of the game to the players if they choose to
 def game_rules():
     rules_of_game =  (f'Hello {player_1_name} Nice to meet you!😊 the rules of the game are:\n{'*'*40}'
               f'\n1.Two players game: one is X, the other is O.\n{'*'*40}'
@@ -22,7 +22,6 @@ def game_rules():
     return rules_of_game
 
 #player's choosing options
-
 def game_options():
     choose:str = (input(f'Hey {player_1_name}, Those are your options:\nTo see the rules of the game press "1"\nfor Player vs Player press "2"\nTo exit press "3"\n'))
     choose = choose.lower()
@@ -40,6 +39,8 @@ _board_ = [' 1', '2', '3',
            ' 7', '8', '9']
 rules = game_rules()
 counter_of_wins = [0,0]
+
+#to create a loop so a reset will be possible, and for counting score
 while True:
     game_board = _board_.copy()
     choice = game_options()
@@ -51,12 +52,14 @@ while True:
     elif choice == '2':
         player_2_name = input(f'{player_1_name}, Who is your opponent? ')
         counter_of_wins = [0, 0]
-        # clean board for reset
+# clean board for reset
         _board_ = [' 1', '2', '3',
                    ' 4', '5', '6',
                    ' 7', '8', '9']
     while True:
         game_board = _board_.copy()
+
+#picking marks for the game
         def player_pick():
             time.sleep (0.5)
             player_1: str= (input(f'{player_1_name}, please pick your mark:\npress X for X or O for O: ''\n'))
@@ -75,10 +78,7 @@ while True:
                 return player_1, player_2
         player_picking = player_pick()
 
-        #putting the board outside the def so that the board won't get reset everytime the players play
-
-        #rules of the board print
-
+#rules of the board of the game
         def board():
             for row in range(len(game_board)):
                 print(game_board[row],end= ' ')
@@ -93,9 +93,7 @@ while True:
             return game_board
         board_of_game = board()
 
-
-        #players pick their spot to play :)
-
+#players pick their spot to play :)
         def pick_spot(sign):
                 #each player move
                 while True:
@@ -113,36 +111,37 @@ while True:
                                 continue
                 return player_action
 
-
-        #Makeing the loop for the game so player 1 and player 2 can play for all spots on board
-
+#Makeing the loop for the game so player 1 and player 2 can play for all spots on board
         def play_flow():
-        #player 1
+#player 1
             while True:
                 pick_spot(player_picking[0])
+                if draw() == 'reset':
+                    return 'reset'
                 if winning_by_row(player_picking[0]) or winning_by_col(player_picking[0]) or winning_by_diagonal(player_picking[0]):
                     print (f'{player_1_name} is the winner🥳')
                     counter_of_wins[0] += 1
                     return counter_of_wins
-                elif draw():
+                elif draw() == True:
                     print ('its a draw🤝🏼')
                     break
-        # player 2
+# player 2
                 pick_spot(player_picking[1])
+                if draw() == 'reset':
+                    return 'reset'
                 if winning_by_row(player_picking[1]) or winning_by_col(player_picking[1]) or winning_by_diagonal(player_picking[1]):
                     print (f'{player_2_name} is the winner🥳')
                     counter_of_wins[1] += 1
                     return counter_of_wins
-                elif draw():
+                elif draw() == True:
                     print('its a draw🤝🏼')
                     break
 
-                #letting the game_flow know that we sent him a reset option, if True, send it out.
-                if_reset = draw
-                if if_reset == 'reset':
+#letting the game_flow know that we sent him a reset option, if True, send it out.
+                if draw == 'reset':
                     return 'reset'
 
-
+#how can the players win
         def winning_by_row(sign):
             sign_for_winning = [sign,sign,sign]
             if board_of_game [0:3] == sign_for_winning or board_of_game [3:6] == sign_for_winning or board_of_game [6::] == sign_for_winning:
@@ -167,42 +166,40 @@ while True:
                 return False
         winning_by_diagonal(board_of_game)
 
-    #draw play and reset mid_game
+#draw game & reset mid_game
         def draw():
             winning_ways = [
-                #row
+                # row
                 board_of_game[0:3], board_of_game[3:6], board_of_game[6:9],
-                #col
+                # col
                 board_of_game[0:9:3], board_of_game[1:9:3], board_of_game[2:9:3],
-                #diagonal
+                # diagonal
                 board_of_game[0:9:4], board_of_game[2:7:2]]
             cant_win = 0
+            #reseting mid game
             for path in winning_ways:
                 if player_picking[0] in path and player_picking[1] in path:
                     cant_win += 1
-
-                #reset_mid_game
+                    if cant_win == 6:
+                        asking_for_reset = input('would you like to reset the game? (y/n): ')
+                        if asking_for_reset == 'y':
+                            print('restarting the game....')
+                            time.sleep(0.5)
+                            for i in range(9):
+                                game_board[i] = _board_[i]
+                            #board()
+                            return 'reset'
+                        else:
+                            continue
             if cant_win == 8:
                 return True
-            elif cant_win >= 6:
-                asking_for_reset = input('would you like to reset the game? (y/n): ')
-                if asking_for_reset == 'y':
-                    print ('restarting the game....')
-                    time.sleep(0.5)
-                    for i in range(9):
-                        game_board[i] = _board_[i]
-                    board()
-                    #returning reset for game_flow
-                    return 'reset'
-                else:
-                    return False
-            else:
-                return False
+            return False
 
-        #checking if game_flow returned reset, if it did, we continue like nothing happened
-        if play_flow() == 'reset':
+        result = play_flow()
+        if result == 'reset':
             continue
 
+#printing the final score after each game
         print (f'{orange}the score is:\nplayer 1: {counter_of_wins[0]}\nplayer 2: {counter_of_wins[1]}')
         restart = input(f'Do you want to play again? press (y/n): {reset_color}')
         restart = restart.lower()
