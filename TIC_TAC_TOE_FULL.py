@@ -1,5 +1,4 @@
 import time
-import random
 
 #colors for printing
 red = '\033[31m' # for
@@ -139,12 +138,9 @@ while True:
                     break
 
                 #letting the game_flow know that we sent him a reset option, if True, send it out.
-                if_reset = draw()
+                if_reset = draw
                 if if_reset == 'reset':
                     return 'reset'
-                elif if_reset == True:
-                    print ('its a draw🤝🏼')
-                    break
 
 
         def winning_by_row(sign):
@@ -186,20 +182,20 @@ while True:
                     cant_win += 1
 
                 #reset_mid_game
-                if cant_win == 5:
-                    asking_for_reset = input('would you like to reset the game? (y/n): ')
-                    if asking_for_reset == 'y':
-                        print ('restarting the game....')
-                        time.sleep(0.5)
-                        for i in range(9):
-                            game_board[i] = _board_[i]
-                        board()
-                        #returning reset for game_flow
-                        return 'reset'
-                    else:
-                        continue
             if cant_win == 8:
                 return True
+            elif cant_win >= 6:
+                asking_for_reset = input('would you like to reset the game? (y/n): ')
+                if asking_for_reset == 'y':
+                    print ('restarting the game....')
+                    time.sleep(0.5)
+                    for i in range(9):
+                        game_board[i] = _board_[i]
+                    board()
+                    #returning reset for game_flow
+                    return 'reset'
+                else:
+                    return False
             else:
                 return False
 
