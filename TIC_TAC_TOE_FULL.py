@@ -148,7 +148,6 @@ while True:
                 return True
             else:
                 return False
-        winning_by_row(board_of_game)
 
         def winning_by_col(sign):
             sign_for_winning = [sign,sign,sign]
@@ -156,7 +155,6 @@ while True:
                 return True
             else:
                 return False
-        winning_by_col(board_of_game)
 
         def winning_by_diagonal(sign):
             winning_sign = [sign,sign,sign]
@@ -164,7 +162,6 @@ while True:
                 return True
             else:
                 return False
-        winning_by_diagonal(board_of_game)
 
 #draw game & reset mid_game
         def draw():
