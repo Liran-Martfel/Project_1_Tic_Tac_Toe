@@ -92,30 +92,32 @@ def play_game():
                         continue
         return player_action
 
-    def play_flow(checking_board, sign):
+    def play_flow(checking_board,sign):
         # player 1
         while True:
             pick_spot(sign[0])
-            if draw(player_picking) == 'reset':
+            check_draw = draw(player_picking)
+            if check_draw == 'reset':
                 return 'reset'
-            if (winning_by_row(checking_board, sign[0]) or winning_by_col(game_board, sign[0])
+            elif (winning_by_row(checking_board, sign[0]) or winning_by_col(game_board, sign[0])
                     or winning_by_diagonal(game_board, sign[0])):
                 print(f'{player_1_name} is the winner🥳')
                 counter_of_wins[0] += 1
                 return counter_of_wins
-            elif draw(player_picking) == True:
+            elif check_draw:
                 print('its a draw🤝🏼')
                 break
             # player 2
             pick_spot(sign[1])
-            if draw(player_picking) == 'reset':
+            check_draw = draw(player_picking)
+            if check_draw == 'reset':
                 return 'reset'
-            if (winning_by_row(game_board, sign[1]) or winning_by_col(game_board, sign[1])
+            elif (winning_by_row(game_board, sign[1]) or winning_by_col(game_board, sign[1])
                     or winning_by_diagonal(game_board, sign[1])):
                 print(f'{player_2_name} is the winner🥳')
                 counter_of_wins[1] += 1
                 return counter_of_wins
-            elif draw(player_picking) == True:
+            elif check_draw == True:
                 print('its a draw🤝🏼')
                 break
             # letting the game_flow know that we sent him a reset option, if True, send it out.
@@ -188,9 +190,9 @@ def play_game():
             _board_ = [' 1', '2', '3',
                        ' 4', '5', '6',
                        ' 7', '8', '9']
+            player_picking = player_pick()
             game_board = _board_.copy()
             board_of_game = board(game_board)
-            player_picking = player_pick()
             signs = player_picking
             result = play_flow(game_board,signs)
             if result == 'reset':
