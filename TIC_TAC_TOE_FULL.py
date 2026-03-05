@@ -8,13 +8,13 @@ reset_color = '\033[0m'
 
 
 def play_game():
-    # Welcome message
+# Welcome message
     print(
         f'{light_purple}welcome to the game of Tic Tac Toe \nThe game was made by: Liran Martefl\nI Hope you enjoy😇\n')
     player_1_name = input(f'{reset_color}What is your name? ')
     player_2_name = None
 
-    # showing the rules of the game to the players if they choose to
+# showing the rules of the game to the players if they choose to
     def game_rules():
         rules_of_game = (f'Hello {player_1_name} Nice to meet you!😊 the rules of the game are:\n{'*' * 40}'
                          f'\n1.Two players game: one is X, the other is O.\n{'*' * 40}'
@@ -24,7 +24,7 @@ def play_game():
                          f'\n5. You need to press the number in order to replace him and pick the spot\n')
         return rules_of_game
 
-    # player's choosing options
+# player's choosing options
     def game_options():
         choose: str = (input(
             f'Hey {player_1_name}, Those are your options:\nTo see the rules of the game press "1"\nfor Player vs Player press "2"\nTo exit press "3"\n'))
@@ -42,8 +42,7 @@ def play_game():
     rules = game_rules()
     counter_of_wins = [0, 0]
 
-    # picking marks for the game
-
+# picking marks for the game
     def player_pick():
         player_1: str = (input(f'{player_1_name}, please pick your mark:\npress X for X or O for O: ''\n'))
         player_1 = player_1.lower()
@@ -60,7 +59,7 @@ def play_game():
     _board_ = [' 1', '2', '3',
                ' 4', '5', '6',
                ' 7', '8', '9']
-    # rules of the board of the game
+# rules of the board of the game
     def board(current_board):
         for row in range(len(current_board)):
             print(current_board[row], end=' ')
@@ -75,7 +74,7 @@ def play_game():
         return current_board
 
 
-    # players pick their spot to play :)
+# players pick their spot to play :)
     def pick_spot(sign):
         # each player move
         while True:
@@ -93,8 +92,8 @@ def play_game():
         return player_action
 
     def play_flow(checking_board,sign):
-        # player 1
         while True:
+# player 1
             pick_spot(sign[0])
             check_draw = draw(player_picking)
             if check_draw == 'reset':
@@ -107,7 +106,7 @@ def play_game():
             elif check_draw:
                 print('its a draw🤝🏼')
                 break
-            # player 2
+# player 2
             pick_spot(sign[1])
             check_draw = draw(player_picking)
             if check_draw == 'reset':
@@ -120,7 +119,7 @@ def play_game():
             elif check_draw == True:
                 print('its a draw🤝🏼')
                 break
-            # letting the game_flow know that we sent him a reset option, if True, send it out.
+# letting the game_flow know that we sent him a reset option, if True, send it out.
             if draw == 'reset':
                 return 'reset'
 
@@ -149,14 +148,14 @@ def play_game():
 
     def draw(marks_on_board):
         winning_ways = [
-            # row
+# row
             board_of_game[0:3], board_of_game[3:6], board_of_game[6:9],
-            # col
+# col
             board_of_game[0:9:3], board_of_game[1:9:3], board_of_game[2:9:3],
-            # diagonal
+# diagonal
             board_of_game[0:9:4], board_of_game[2:7:2]]
         cant_win = 0
-        # restarting mid game
+# restarting mid game
         for path in winning_ways:
             if marks_on_board[0] in path and marks_on_board[1] in path:
                 cant_win += 1
@@ -175,7 +174,7 @@ def play_game():
             return True
         return False
 
-    # to create a loop so a reset will be possible, and for counting score
+# to create a loop so a reset will be possible, and for counting score
     while True:
         choice = game_options()
         if choice == '3':
