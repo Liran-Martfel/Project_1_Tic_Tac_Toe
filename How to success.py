@@ -10,10 +10,11 @@
 #3.1 checking for illegal moves.✅
 #3.2 having a delay of 0.5 till asking for the next move.✅
 #3.3 in case of a draw, keep the option to reset or quit the game.✅
-#4. checking for a winner✅. if there is. print it nicely.
+#4. checking for a winner✅. if there is. print it nicely✅.
 #4.1 make a score board.✅
 #4.2 add a reset option after 6 turns✅.
 #4.3 orgenize the def's✅
+#4.4 the sign that wins needs to be at a diffrent color or been replaced by a line.
 
 ????????? in the main menu, add an option to play agenst human for 1, or against computer press 2 (randomly - bonus number 2)
 
