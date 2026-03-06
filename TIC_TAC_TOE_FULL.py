@@ -53,13 +53,13 @@ def play_game():
         player_1: str = (input(f'{player_1_name}, please pick your mark:\npress X for X or O for O: ''\n'))
         player_1 = player_1.lower()
         if player_1 == 'x':
-            player_1 = '❌'
-            player_2 = '⭕️'
-            print(f'{player_1_name} is: {player_1} {player_2_name} is: {player_2}')
+            player_1 = f'{forest_green}✖{reset_color}'
+            player_2 = '⭕'
+            print(f'{player_1_name} is: {player_1} {player_2_name} is: {player_2} GOOD LUCK😄')
             return player_1, player_2
         else:
-            player_1 = '⭕️'
-            player_2 = '❌'
+            player_1 = '⭕'
+            player_2 = f'{forest_green}✖{reset_color}'
             print(f'{player_1_name} is: {player_1} {player_2_name} is: {player_2} GOOD LUCK😄')
             return player_1, player_2
     _board_ = [' 1', '2', '3',
@@ -87,7 +87,7 @@ def play_game():
             if choose.isdigit():
                 player_action = int(choose)
                 if 1 <= player_action <= 9:
-                    if board_of_game[player_action - 1] != '❌' and board_of_game[player_action - 1] != '⭕️':
+                    if board_of_game[player_action - 1] != '✖' and board_of_game[player_action - 1] != '⭕':
                         board_of_game[player_action - 1] = sign
                         board(game_board)
                         return sign
@@ -96,7 +96,7 @@ def play_game():
                         continue
         return player_action
 
-    def play_flow(checking_board,sign):
+    def play_flow(current_board,sign):
         for turn in range (9):
             if turn % 2 == 0:
                 name = player_1_name
@@ -110,10 +110,9 @@ def play_game():
             check_draw = draw(sign)
             if check_draw == 'reset':
                 return 'reset'
-            elif (winning_by_row(checking_board, mark) or winning_by_col(checking_board,mark)
-                    or winning_by_diagonal(checking_board,mark)):
-                print ()
-                print(f'{yellow}-----{name} is the winner🥳-----{reset_color}\n')
+            elif (winning_by_row(current_board, mark) or winning_by_col(current_board,mark)
+                    or winning_by_diagonal(current_board,mark)):
+                print(f'\n{yellow}-----{name} is the winner🥳-----{reset_color}\n')
                 counter_of_wins[i] += 1
                 return counter_of_wins
             elif check_draw == True:
@@ -179,7 +178,7 @@ def play_game():
     while True:
         choice = game_options()
         if choice == '3':
-            print('Thank you for playing, good bye!')
+            print('Thank you for playing, goodbye!')
             break
         if choice == '1':
             continue
@@ -202,15 +201,17 @@ def play_game():
             restart = input(f'Do you want to play again? press (y/n): {reset_color}\n')
             restart = restart.lower()
             if restart != 'y':
-                print(f'{light_purple}Thank you for playing!{reset_color}\n')
                 if counter_of_wins[0] > counter_of_wins[1]:
                     print(f'{yellow}The winner is: {player_1_name}🎉🥇🎉{reset_color}\n')
+                    print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
                 elif counter_of_wins[1] == counter_of_wins[0]:
                     print(f'{bright_white}Its a draw! 🤝🏼 good job!{reset_color}\n')
+                    print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
                 else:
                     print(f'{yellow}The winner is: {player_2_name}🎉🥇🎉{reset_color}\n')
+                    print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
             else:
                 continue
