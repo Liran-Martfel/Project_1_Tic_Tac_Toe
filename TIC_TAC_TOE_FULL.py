@@ -92,29 +92,23 @@ def play_game():
         return player_action
 
     def play_flow(checking_board,sign):
-        while True:
-# player 1
-            pick_spot(sign[0])
-            check_draw = draw(player_picking)
+        for turn in range (9):
+            if turn % 2 == 0:
+                name = player_1_name
+                mark = sign[0]
+                i = 0
+            else:
+                name = player_2_name
+                mark = sign[1]
+                i = 1
+            pick_spot(mark)
+            check_draw = draw(sign)
             if check_draw == 'reset':
                 return 'reset'
-            elif (winning_by_row(checking_board, sign[0]) or winning_by_col(game_board, sign[0])
-                    or winning_by_diagonal(game_board, sign[0])):
-                print(f'{player_1_name} is the winner🥳')
-                counter_of_wins[0] += 1
-                return counter_of_wins
-            elif check_draw:
-                print('its a draw🤝🏼')
-                break
-# player 2
-            pick_spot(sign[1])
-            check_draw = draw(player_picking)
-            if check_draw == 'reset':
-                return 'reset'
-            elif (winning_by_row(game_board, sign[1]) or winning_by_col(game_board, sign[1])
-                    or winning_by_diagonal(game_board, sign[1])):
-                print(f'{player_2_name} is the winner🥳')
-                counter_of_wins[1] += 1
+            elif (winning_by_row(checking_board, mark) or winning_by_col(checking_board,mark)
+                    or winning_by_diagonal(checking_board,mark)):
+                print(f'{name} is the winner🥳')
+                counter_of_wins[i] += 1
                 return counter_of_wins
             elif check_draw == True:
                 print('its a draw🤝🏼')
@@ -122,6 +116,7 @@ def play_game():
 # letting the game_flow know that we sent him a reset option, if True, send it out.
             if draw == 'reset':
                 return 'reset'
+        return counter_of_wins
 
     def winning_by_row(current_board, sign):
         winning_sign = [sign, sign, sign]
@@ -196,7 +191,7 @@ def play_game():
             result = play_flow(game_board,signs)
             if result == 'reset':
                 continue
-        # printing the final score after each game
+# printing the final score after each game
             print(f'{orange}the score is:\nplayer 1: {counter_of_wins[0]}\nplayer 2: {counter_of_wins[1]}')
             restart = input(f'Do you want to play again? press (y/n): {reset_color}')
             restart = restart.lower()
