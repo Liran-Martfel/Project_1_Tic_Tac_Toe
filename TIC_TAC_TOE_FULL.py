@@ -15,7 +15,7 @@ def play_game():
     line = f'{light_purple}{'─' * 54}{reset_color}'
     print(line)
     print(f'{forest_green}    ✨  WELCOME TO THE GAME OF TIC TAC TOE  ✨{reset_color}')
-    print(f'{forest_green}    ✨  Crafted with care by: Liran Martefl ✨{reset_color}')
+    print(f'{forest_green}    ✨  Crafted with care by: Liran Martfel ✨{reset_color}')
     print(f'{forest_green}               I hope you enjoy😇                      ')
     print(line)
     player_1_name = input(f'{reset_color}What is your name? \n')
@@ -25,10 +25,10 @@ def play_game():
     def game_rules():
         rules_of_game = (f'Hello {player_1_name} Nice to meet you!😊 the rules of the game are:\n{forest_green}{'─' * 60}{reset_color}'
                          f'\n1.Two players game: one is X, the other is O.\n{forest_green}{'─' * 60}{reset_color}'
-                         f'\n2.Players take turns placing their mark in an numbered square.\n{forest_green}{'─' * 60}{reset_color}'
-                         f'\n3.The first player to get 3 in a row (horizontal, vertical, or diagonal) wins.\n{forest_green}{'─' * 60}{reset_color}'
-                         f'\n4.If there is no possible way for either player to get three in a row, the game is a draw.\n{forest_green}{'─' * 60}{reset_color}'
-                         f'\n5. You need to press the number in order to replace him and pick the spot\n{forest_green}{'─' * 60}{reset_color}')
+                         f'\n2.Players take turns placing their mark in a numbered square.\n{forest_green}{'─' * 60}{reset_color}'
+                         f'\n3.First player to get 3 in a row (Row or Column or diagonal) wins.\n{forest_green}{'─' * 60}{reset_color}'
+                         f'\n4.If there is no way for either player to get three in a row, it is a Tie.\n{forest_green}{'─' * 60}{reset_color}'
+                         f'\n5.You need to press the number in order to replace it\n{forest_green}{'─' * 60}{reset_color}')
         return rules_of_game
 
 # player's choosing options
@@ -56,12 +56,12 @@ def play_game():
         if player_1 == 'x':
             player_1 = f'{forest_green}✖{reset_color}'
             player_2 = '⭕'
-            print(f'{player_1_name} is: {player_1} {player_2_name} is: {player_2} GOOD LUCK😄')
+            print(f'\n{player_1_name} is:{player_1}\n{player_2_name} is:{player_2}\nGOOD LUCK😄\n')
             return player_1, player_2
         else:
             player_1 = '⭕'
             player_2 = f'{forest_green}✖{reset_color}'
-            print(f'{player_1_name} is: {player_1} {player_2_name} is: {player_2} GOOD LUCK😄')
+            print(f'\n{player_1_name} is:{player_1}\n{player_2_name} is:{player_2}\nGOOD LUCK😄\n')
             return player_1, player_2
     _board_ = [' 1', '2', '3',
                ' 4', '5', '6',
@@ -108,14 +108,14 @@ def play_game():
                 mark = sign[1]
                 i = 1
             pick_spot(mark)
-            check_draw = draw(sign)
-            if check_draw == 'reset':
-                return 'reset'
-            elif (winning_by_row(current_board, mark) or winning_by_col(current_board,mark)
+            if (winning_by_row(current_board, mark) or winning_by_col(current_board,mark)
                     or winning_by_diagonal(current_board,mark)):
                 print(f'\n{yellow}-----{name} is the winner🥳-----{reset_color}\n')
                 counter_of_wins[i] += 1
                 return counter_of_wins
+            check_draw = draw(sign)
+            if check_draw == 'reset':
+                return 'reset'
             elif check_draw == True:
                 print('its a draw🤝🏼')
                 tie_counter[0] += 1
@@ -186,7 +186,7 @@ def play_game():
         if choice == '1':
             continue
         elif choice == '2':
-            player_2_name = input(f'{player_1_name}, {red}Who is your opponent?{reset_color} ')
+            player_2_name = input(f'{player_1_name}, {light_purple}Who is your opponent?{reset_color} ')
             counter_of_wins = [0, 0]
             tie_counter = [0]
         while True:
@@ -201,9 +201,9 @@ def play_game():
             if result == 'reset':
                 continue
 # printing the final score after each game
-            print(f'{orange}the score is:\nplayer 1: {bright_white}{counter_of_wins[0]}{orange}'
-                  f'\nplayer 2: {bright_white}{counter_of_wins[1]}{orange}\nDraws: {bright_white}{tie_counter[0]}')
-            restart = input(f'Do you want to play again? press \n(y/n): {reset_color}')
+            print(f'{orange}the score is:\n{player_1_name}: {bright_white}{counter_of_wins[0]}{orange}'
+                  f'\n{player_2_name}: {bright_white}{counter_of_wins[1]}{orange}\nDraws: {bright_white}{tie_counter[0]}')
+            restart = input(f'Do you want to play again?\n(y/n): {reset_color}')
             restart = restart.lower()
             if restart != 'y':
                 if counter_of_wins[0] > counter_of_wins[1]:
