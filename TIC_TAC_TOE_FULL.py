@@ -25,7 +25,7 @@ def play_game():
     def game_rules():
         rules_of_game = (f'Hello {player_1_name} Nice to meet you!😊 the rules of the game are:\n{forest_green}{'─' * 60}{reset_color}'
                          f'\n1.Two players game: one is X, the other is O.\n{forest_green}{'─' * 60}{reset_color}'
-                         f'\n2.Players take turns placing their mark in an empty square.\n{forest_green}{'─' * 60}{reset_color}'
+                         f'\n2.Players take turns placing their mark in an numbered square.\n{forest_green}{'─' * 60}{reset_color}'
                          f'\n3.The first player to get 3 in a row (horizontal, vertical, or diagonal) wins.\n{forest_green}{'─' * 60}{reset_color}'
                          f'\n4.If there is no possible way for either player to get three in a row, the game is a draw.\n{forest_green}{'─' * 60}{reset_color}'
                          f'\n5. You need to press the number in order to replace him and pick the spot\n{forest_green}{'─' * 60}{reset_color}')
@@ -50,7 +50,7 @@ def play_game():
 
 # picking marks for the game
     def player_pick():
-        player_1: str = (input(f'{player_1_name}, please pick your mark:\npress X for X or O for O: ''\n'))
+        player_1: str = (input(f'{player_1_name}, please pick your mark:\npress X for {forest_green}X{reset_color} or anything else for {red}O{reset_color}: ''\n'))
         player_1 = player_1.lower()
         if player_1 == 'x':
             player_1 = f'{forest_green}✖{reset_color}'
@@ -164,7 +164,7 @@ def play_game():
                     asking_for_reset = input(f'(y/n): {reset_color}')
                     if asking_for_reset == 'y':
                         print('restarting the game....')
-                        time.sleep(0.5)
+                        time.sleep(1)
                         for i in range(9):
                             game_board[i] = _board_[i]
                         return 'reset'
@@ -198,22 +198,21 @@ def play_game():
                 continue
 # printing the final score after each game
             print(f'{orange}the score is:\nplayer 1: {counter_of_wins[0]}\nplayer 2: {counter_of_wins[1]}')
-            restart = input(f'Do you want to play again? press (y/n): {reset_color}\n')
+            restart = input(f'Do you want to play again? press \n(y/n): {reset_color}')
             restart = restart.lower()
             if restart != 'y':
                 if counter_of_wins[0] > counter_of_wins[1]:
-                    print(f'{yellow}The winner is: {player_1_name}🎉🥇🎉{reset_color}\n')
+                    print(f'\n{yellow}The winner is: {player_1_name}🎉🥇🎉{reset_color}\n')
                     print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
                 elif counter_of_wins[1] == counter_of_wins[0]:
-                    print(f'{bright_white}Its a draw! 🤝🏼 good job!{reset_color}\n')
+                    print(f'\n{bright_white}Its a draw! 🤝🏼 good job!{reset_color}\n')
                     print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
                 else:
-                    print(f'{yellow}The winner is: {player_2_name}🎉🥇🎉{reset_color}\n')
+                    print(f'\n{yellow}The winner is: {player_2_name}🎉🥇🎉{reset_color}\n')
                     print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
             else:
                 continue
 play_game()
-#working

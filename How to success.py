@@ -14,7 +14,6 @@
 #4.1 make a score board.✅
 #4.2 add a reset option after 6 turns✅.
 #4.3 organize the def's✅
-#4.4 the sign that wins needs to be at a different color or been replaced by a line.
 
 
 
