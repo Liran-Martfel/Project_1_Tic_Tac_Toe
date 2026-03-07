@@ -47,6 +47,7 @@ def play_game():
             return '3'
     rules = game_rules()
     counter_of_wins = [0, 0]
+    tie_counter = [0]
 
 # picking marks for the game
     def player_pick():
@@ -96,7 +97,7 @@ def play_game():
                         continue
         return player_action
 
-    def play_flow(current_board,sign):
+    def play_flow(current_board, sign):
         for turn in range (9):
             if turn % 2 == 0:
                 name = player_1_name
@@ -117,11 +118,12 @@ def play_game():
                 return counter_of_wins
             elif check_draw == True:
                 print('its a draw🤝🏼')
-                break
+                tie_counter[0] += 1
+                return tie_counter
 # letting the game_flow know that we sent him a reset option, if True, send it out.
             if draw == 'reset':
                 return 'reset'
-        return counter_of_wins
+        return counter_of_wins,tie_counter
 
     def winning_by_row(current_board, sign):
         winning_sign = [sign, sign, sign]
@@ -155,6 +157,7 @@ def play_game():
 # diagonal
             board_of_game[0:9:4], board_of_game[2:7:2]]
         cant_win = 0
+
 # restarting mid game
         for path in winning_ways:
             if marks_on_board[0] in path and marks_on_board[1] in path:
@@ -185,6 +188,7 @@ def play_game():
         elif choice == '2':
             player_2_name = input(f'{player_1_name}, {red}Who is your opponent?{reset_color} ')
             counter_of_wins = [0, 0]
+            tie_counter = [0]
         while True:
             _board_ = [' 1', '2', '3',
                        ' 4', '5', '6',
@@ -197,7 +201,8 @@ def play_game():
             if result == 'reset':
                 continue
 # printing the final score after each game
-            print(f'{orange}the score is:\nplayer 1: {counter_of_wins[0]}\nplayer 2: {counter_of_wins[1]}')
+            print(f'{orange}the score is:\nplayer 1: {bright_white}{counter_of_wins[0]}{orange}'
+                  f'\nplayer 2: {bright_white}{counter_of_wins[1]}{orange}\nDraws: {bright_white}{tie_counter[0]}')
             restart = input(f'Do you want to play again? press \n(y/n): {reset_color}')
             restart = restart.lower()
             if restart != 'y':
@@ -205,7 +210,7 @@ def play_game():
                     print(f'\n{yellow}The winner is: {player_1_name}🎉🥇🎉{reset_color}\n')
                     print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
-                elif counter_of_wins[1] == counter_of_wins[0]:
+                elif tie_counter[0] > counter_of_wins[1] and tie_counter[0] > counter_of_wins[0]:
                     print(f'\n{bright_white}Its a draw! 🤝🏼 good job!{reset_color}\n')
                     print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
