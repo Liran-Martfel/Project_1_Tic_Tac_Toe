@@ -54,13 +54,13 @@ def play_game():
         player_1: str = (input(f'{player_1_name}, please pick your mark:\npress X for {forest_green}X{reset_color} or anything else for {red}O{reset_color}: ''\n'))
         player_1 = player_1.lower()
         if player_1 == 'x':
-            player_1 = f'{forest_green}✖{reset_color}'
-            player_2 = '⭕'
+            player_1 = 'X'
+            player_2 = 'O'
             print(f'\n{player_1_name} is:{player_1}\n{player_2_name} is:{player_2}\nGOOD LUCK😄\n')
             return player_1, player_2
         else:
-            player_1 = '⭕'
-            player_2 = f'{forest_green}✖{reset_color}'
+            player_1 = 'O'
+            player_2 = 'X'
             print(f'\n{player_1_name} is:{player_1}\n{player_2_name} is:{player_2}\nGOOD LUCK😄\n')
             return player_1, player_2
     _board_ = [' 1', '2', '3',
@@ -68,16 +68,22 @@ def play_game():
                ' 7', '8', '9']
 # rules of the board of the game
     def board(current_board):
-        for row in range(len(current_board)):
-            print(current_board[row], end=' ')
-            match row:
-                case 2 | 5:
-                    print()
-                    print('----+-----+----')
-                case 8:
-                    print()
-                case _:
-                    print(' | ', end=' ')
+        # פונקציית עזר שמוסיפה צבע רק בזמן ההדפסה
+        def c(mark):
+            mark_str = str(mark).strip()  # מוודא שזה טקסט נקי
+            if 'X' in mark_str:
+                return f"{forest_green}X{reset_color}"
+            elif 'O' in mark_str:
+                return f"{red}O{reset_color}"
+            return mark_str  # מחזיר את המספר כפי שהוא
+
+        # עכשיו הלוח תמיד יהיה ישר כי הרווחים והקווים קבועים לגמרי
+        print(f" {c(current_board[0])} | {c(current_board[1])} | {c(current_board[2])} ")
+        print("---+---+---")
+        print(f" {c(current_board[3])} | {c(current_board[4])} | {c(current_board[5])} ")
+        print("---+---+---")
+        print(f" {c(current_board[6])} | {c(current_board[7])} | {c(current_board[8])} ")
+
         return current_board
 
 # players pick their spot to play :)
@@ -88,7 +94,7 @@ def play_game():
             if choose.isdigit():
                 player_action = int(choose)
                 if 1 <= player_action <= 9:
-                    if board_of_game[player_action - 1] != '✖' and board_of_game[player_action - 1] != '⭕':
+                    if board_of_game[player_action - 1] != 'X' and board_of_game[player_action - 1] != 'O':
                         board_of_game[player_action - 1] = sign
                         board(game_board)
                         return sign
@@ -108,12 +114,11 @@ def play_game():
                 mark = sign[1]
                 i = 1
             pick_spot(mark)
-            if (winning_by_row(current_board, mark) or winning_by_col(current_board,mark)
-                    or winning_by_diagonal(current_board,mark)):
+            if winning_by_row_col_diagonal(current_board, mark):
                 print(f'\n{yellow}-----{name} is the winner🥳-----{reset_color}\n')
                 counter_of_wins[i] += 1
                 return counter_of_wins
-            check_draw = draw(sign)
+            check_draw = draw(sign,current_board)
             if check_draw == 'reset':
                 return 'reset'
             elif check_draw == True:
@@ -125,39 +130,24 @@ def play_game():
                 return 'reset'
         return counter_of_wins,tie_counter
 
-    def winning_by_row(current_board, sign):
+    def winning_by_row_col_diagonal(current_board, sign):
         winning_sign = [sign, sign, sign]
-        if current_board[0:3] == winning_sign or current_board[3:6] == winning_sign or current_board[
-            6::] == winning_sign:
+        if winning_sign in path_for_win(current_board):
             return True
         else:
             return False
-    def winning_by_col(current_board, sign):
-        winning_sign = [sign, sign, sign]
-        if current_board[0::3] == winning_sign or current_board[1::3] == winning_sign or current_board[
-            2::3] == winning_sign:
-            return True
-        else:
-            return False
-    def winning_by_diagonal(current_board, sign):
-        winning_sign = [sign, sign, sign]
-        if current_board[0::4] == winning_sign or current_board[2:7:2] == winning_sign:
-            return True
-        else:
-            return False
+#bool check if any cross-path is True, then return it to the board and checking with winning def if True or False
+    def path_for_win(current_board):
+        return [
+                current_board[0:3], current_board[3:6], current_board[6::], #row
+                current_board[0::3], current_board[1::3], current_board[2::3], #col
+                current_board[0::4], current_board[2:7:2] # diagonal
+                ]
 
-    def draw(marks_on_board):
-        winning_ways = [
-# row
-            board_of_game[0:3], board_of_game[3:6], board_of_game[6:9],
-# col
-            board_of_game[0:9:3], board_of_game[1:9:3], board_of_game[2:9:3],
-# diagonal
-            board_of_game[0:9:4], board_of_game[2:7:2]]
+    def draw(marks_on_board,current_board):
         cant_win = 0
-
 # restarting mid game
-        for path in winning_ways:
+        for path in path_for_win(current_board):
             if marks_on_board[0] in path and marks_on_board[1] in path:
                 cant_win += 1
                 if cant_win == 6:
