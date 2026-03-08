@@ -238,7 +238,7 @@ def play_game():
                     print(f'\n{yellow}The winner is: {player_1_name}🎉🥇🎉{reset_color}\n')
                     print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
-                elif tie_counter[0] > counter_of_wins[1] and tie_counter[0] > counter_of_wins[0]:
+                elif (tie_counter[0] > counter_of_wins[1] and tie_counter[0] > counter_of_wins[0]) or (counter_of_wins[0] == counter_of_wins[1]):
                     print(f'\n{bright_white}Its a draw! 🤝🏼 good job!{reset_color}\n')
                     print(f'{light_purple}Thank you for playing!{reset_color}\n')
                     break
