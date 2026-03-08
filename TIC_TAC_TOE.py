@@ -68,16 +68,13 @@ def play_game():
                ' 7', '8', '9']
 # rules of the board of the game
     def board(current_board):
-        # פונקציית עזר שמוסיפה צבע רק בזמן ההדפסה
         def c(mark):
-            mark_str = str(mark).strip()  # מוודא שזה טקסט נקי
+            mark_str = str(mark).strip()
             if 'X' in mark_str:
                 return f"{forest_green}X{reset_color}"
             elif 'O' in mark_str:
                 return f"{red}O{reset_color}"
-            return mark_str  # מחזיר את המספר כפי שהוא
-
-        # עכשיו הלוח תמיד יהיה ישר כי הרווחים והקווים קבועים לגמרי
+            return mark_str
         print(f" {c(current_board[0])} | {c(current_board[1])} | {c(current_board[2])} ")
         print("---+---+---")
         print(f" {c(current_board[3])} | {c(current_board[4])} | {c(current_board[5])} ")
