@@ -11,6 +11,9 @@ bright_white = '\033[97m'
 reset_color = '\033[0m'
 
 def play_game():
+    """
+    :return: welcome message
+    """
 # Welcome message
     line = f'{light_purple}{'─' * 54}{reset_color}'
     print(line)
@@ -23,6 +26,9 @@ def play_game():
 
 # showing the rules of the game to the players if they choose to
     def game_rules():
+        """
+        :return: prints the rules of the game
+        """
         rules_of_game = (f'Hello {player_1_name} Nice to meet you!😊 the rules of the game are:\n{forest_green}{'─' * 60}{reset_color}'
                          f'\n1.Two players game: one is X, the other is O.\n{forest_green}{'─' * 60}{reset_color}'
                          f'\n2.Players take turns placing their mark in a numbered square.\n{forest_green}{'─' * 60}{reset_color}'
@@ -33,6 +39,10 @@ def play_game():
 
 # player's choosing options
     def game_options():
+        """
+        showing the menu of the game
+        :return: hte choice of the player for the game
+        """
         choose: str = (input(f'Hey {player_1_name}, Those are your options:\nTo see the rules of the game press {light_purple}"1"{reset_color}\n'
                        f'for Player vs Player press {light_purple}"2"{reset_color}\nTo exit press {light_purple}"3"{reset_color}\n'))
         choose = choose.lower()
@@ -49,8 +59,11 @@ def play_game():
     counter_of_wins = [0, 0]
     tie_counter = [0]
 
-# picking marks for the game
     def player_pick():
+        """
+        player picks his mark for the game
+        :return: the marks
+        """
         player_1: str = (input(f'{player_1_name}, please pick your mark:\npress X for {forest_green}X{reset_color} or anything else for {red}O{reset_color}: ''\n'))
         player_1 = player_1.lower()
         if player_1 == 'x':
@@ -68,6 +81,10 @@ def play_game():
                ' 7', '8', '9']
 # rules of the board of the game
     def board(current_board):
+        """
+        :param current_board: the board itself at this moment
+        :return: the board of the current game that is running
+        """
         def c(mark):
             mark_str = str(mark).strip()
             if 'X' in mark_str:
@@ -85,6 +102,10 @@ def play_game():
 
 # players pick their spot to play :)
     def pick_spot(sign):
+        """
+        :param sign: sign is the mark that the player choose, then seeing if the [i] in the board is available, and if so, replace it with the mark
+        :return: the action of the player, and print if the place is taken
+        """
         # each player move
         while True:
             choose = input('\nplayer, What is your move? press the number you want to replace: ')
@@ -101,6 +122,12 @@ def play_game():
         return player_action
 
     def play_flow(current_board, sign):
+        """
+        this def is the heart of the game, where all the def come together.
+        :param current_board: the board of the game at this point of the game
+        :param sign: the mark that the player
+        :return: returning 'reset' if the player choose to reset the game
+        """
         for turn in range (9):
             if turn % 2 == 0:
                 name = player_1_name
@@ -128,6 +155,12 @@ def play_game():
         return counter_of_wins,tie_counter
 
     def winning_by_row_col_diagonal(current_board, sign):
+        """
+        this def is showing how you can win, win 3 sign the same in a row.
+        :param current_board: checking with the board
+        :param sign: getting inside a list
+        :return:True or False
+        """
         winning_sign = [sign, sign, sign]
         if winning_sign in path_for_win(current_board):
             return True
@@ -135,6 +168,10 @@ def play_game():
             return False
 #bool check if any cross-path is True, then return it to the board and checking with winning def if True or False
     def path_for_win(current_board):
+        """
+        :param current_board: showing all the possibilities you can win with in the board
+        :return: all the option for winning
+        """
         return [
                 current_board[0:3], current_board[3:6], current_board[6::], #row
                 current_board[0::3], current_board[1::3], current_board[2::3], #col
@@ -142,6 +179,12 @@ def play_game():
                 ]
 
     def draw(marks_on_board,current_board):
+        """
+        this def responsibility is to check if the player is close to a tie, and ask if he wants to reset, if he does, print the board from scratch and reset the game
+        :param marks_on_board: where the player placed their mark on the board
+        :param current_board: checking the board for tie or reset
+        :return:
+        """
         cant_win = 0
 # restarting mid game
         for path in path_for_win(current_board):
