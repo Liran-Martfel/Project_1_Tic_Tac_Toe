@@ -1,7 +1,7 @@
 import time
 
 # colors for printing
-red = '\033[31m'  # for
+red = '\033[31m' 
 orange = '\033[38;5;208m'
 dark_orange = '\033[38;5;166m'
 yellow = '\033[93m'
