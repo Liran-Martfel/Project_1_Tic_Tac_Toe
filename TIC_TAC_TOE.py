@@ -119,8 +119,7 @@ def play_game():
                     else:
                         print('this place is taken🥲')
                         continue
-        return player_action
-
+                        
     def play_flow(current_board, sign):
         """
         this def is the heart of the game, where all the def come together.
