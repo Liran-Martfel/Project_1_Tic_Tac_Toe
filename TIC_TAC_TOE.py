@@ -1,7 +1,7 @@
 import time
 
 # colors for printing
-red = '\033[31m' 
+red = '\033[31m'
 orange = '\033[38;5;208m'
 dark_orange = '\033[38;5;166m'
 yellow = '\033[93m'
@@ -37,7 +37,6 @@ def play_game():
                          f'\n5.You need to press the number in order to replace it\n{forest_green}{'─' * 60}{reset_color}')
         return rules_of_game
 
-# player's choosing options
     def game_options():
         """
         showing the menu of the game
@@ -69,13 +68,11 @@ def play_game():
         if player_1 == 'x':
             player_1 = 'X'
             player_2 = 'O'
-            print(f'\n{player_1_name} is:{player_1}\n{player_2_name} is:{player_2}\nGOOD LUCK😄\n')
-            return player_1, player_2
         else:
             player_1 = 'O'
             player_2 = 'X'
-            print(f'\n{player_1_name} is:{player_1}\n{player_2_name} is:{player_2}\nGOOD LUCK😄\n')
-            return player_1, player_2
+        print(f'\n{player_1_name} is:{player_1}\n{player_2_name} is:{player_2}\nGOOD LUCK😄\n')
+        return player_1, player_2
     _board_ = [' 1', '2', '3',
                ' 4', '5', '6',
                ' 7', '8', '9']
@@ -100,26 +97,27 @@ def play_game():
 
         return current_board
 
-# players pick their spot to play :)
-    def pick_spot(sign):
+    def pick_spot(sign,current_board):
         """
+        :param current_board:
         :param sign: sign is the mark that the player choose, then seeing if the [i] in the board is available, and if so, replace it with the mark
         :return: the action of the player, and print if the place is taken
         """
-        # each player move
         while True:
             choose = input('\nplayer, What is your move? press the number you want to replace: ')
             if choose.isdigit():
                 player_action = int(choose)
                 if 1 <= player_action <= 9:
-                    if board_of_game[player_action - 1] != 'X' and board_of_game[player_action - 1] != 'O':
-                        board_of_game[player_action - 1] = sign
-                        board(game_board)
+                    if current_board[player_action - 1] != 'X' and current_board[player_action - 1] != 'O':
+                        current_board[player_action - 1] = sign
+                        board(current_board)
                         return sign
                     else:
                         print('this place is taken🥲')
                         continue
-                        
+            else:
+                print('please enter a number between 1 and 9🙏: ')
+
     def play_flow(current_board, sign):
         """
         this def is the heart of the game, where all the def come together.
@@ -136,7 +134,7 @@ def play_game():
                 name = player_2_name
                 mark = sign[1]
                 i = 1
-            pick_spot(mark)
+            pick_spot(mark,current_board)
             if winning_by_row_col_diagonal(current_board, mark):
                 print(f'\n{yellow}-----{name} is the winner🥳-----{reset_color}\n')
                 counter_of_wins[i] += 1
@@ -148,9 +146,6 @@ def play_game():
                 print('its a draw🤝🏼')
                 tie_counter[0] += 1
                 return tie_counter
-# letting the game_flow know that we sent him a reset option, if True, send it out.
-            if draw == 'reset':
-                return 'reset'
         return counter_of_wins,tie_counter
 
     def winning_by_row_col_diagonal(current_board, sign):
@@ -184,23 +179,22 @@ def play_game():
         :param current_board: checking the board for tie or reset
         :return:
         """
-        cant_win = 0
-# restarting mid game
+        open_path = 0
         for path in path_for_win(current_board):
-            if marks_on_board[0] in path and marks_on_board[1] in path:
-                cant_win += 1
-                if cant_win == 6:
-                    print(f'{dark_orange}it is close to a tie, would you like to reset?')
-                    asking_for_reset = input(f'(y/n): {reset_color}')
-                    if asking_for_reset == 'y':
-                        print('restarting the game....')
-                        time.sleep(1)
-                        for i in range(9):
-                            game_board[i] = _board_[i]
-                        return 'reset'
-                    else:
-                        continue
-        if cant_win == 8:
+            has_x = marks_on_board[0] in path
+            has_o = marks_on_board[1] in path
+            if not (has_x and has_o):
+                open_path += 1
+        if open_path == 1:
+            print(f'{dark_orange}it is close to a tie, would you like to reset?')
+            asking_for_reset = input(f'(y/n): {reset_color}')
+            if asking_for_reset == 'y':
+                print('restarting the game....')
+                time.sleep(1)
+                for i in range(9):
+                    game_board[i] = _board_[i]
+                return 'reset'
+        if open_path == 0:
             return True
         return False
 
@@ -222,9 +216,8 @@ def play_game():
                        ' 7', '8', '9']
             player_picking = player_pick()
             game_board = _board_.copy()
-            board_of_game = board(game_board)
-            signs = player_picking
-            result = play_flow(game_board,signs)
+            board(game_board)
+            result = play_flow(game_board,player_picking)
             if result == 'reset':
                 continue
 # printing the final score after each game
