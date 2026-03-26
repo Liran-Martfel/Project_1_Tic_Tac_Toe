@@ -30,6 +30,9 @@ animation_by_ai: אלמנטים ויזואליים שנוצרו בשילוב כ�
 
 ביצוע מהלכים: הלוח ממוספר 1-9. בוחרים מספר והסימן יופיע במיקום המתאים.
 
+
+
+
 English Version
 This Tic-Tac-Toe project blends classic programming logic with a modern User Interface (UI) right in the terminal. The game provides a smooth, colorful, and interactive experience featuring advanced animations and smart score management.
 
