@@ -38,3 +38,48 @@ python TIC_TAC_TOE.py
 
 👨‍💻 נוצר על ידי
 לירן מרטפל (Liran Martfel) - נבנה עם המון מחשבה וסטייל 😇
+
+
+
+Certainly! Here is the professional English version of your README, maintaining the same structure and style:
+
+🎮 Python Tic-Tac-Toe (X-O) Game
+This Tic-Tac-Toe project blends classic programming logic with a modern User Interface (UI) right in the terminal. The game was designed to provide a smooth, colorful, and interactive experience, featuring advanced animations and smart score management.
+
+✨ Key Features
+🎨 Vibrant Visual Design: Utilizes ANSI color codes to distinguish between players and highlight system messages, making the board clear and engaging.
+
+👥 Social Gameplay: Full support for two players with customizable names and win-tracking.
+
+📊 Continuous Score Tracking: The system tracks cumulative wins for each player and the total number of draws throughout the entire session.
+
+💡 Smart "End Game" Logic: Automatically detects inevitable draw scenarios and suggests a board reset to keep the game pace fast.
+
+🎬 Advanced Animation System: Integrated visual effects that give the game a dynamic and professional feel.
+
+📂 Project Structure & Animations
+The project is modularized to maintain organization and style:
+
+TIC_TAC_TOE.py: The main executable and the heart of the game – contains the core logic, turn management, and win-condition checks.
+
+animation.py: The module responsible for the entire visual aspect. It includes:
+
+animation_by_myself: Handcrafted animations designed by me, focusing on precise timing and a personal user experience.
+
+animation_by_ai: Visual elements enhanced using AI tools, giving the game a sophisticated and polished look.
+
+🕹️ How to Play
+Launch: Simply run the main file:
+
+Bash
+python TIC_TAC_TOE.py
+Identify: Enter player names and enjoy the opening animation sequence.
+
+Pick a Side: Choose whether you want to be X or O.
+
+Make Moves: The board is numbered 1-9. Enter a number, and your mark will appear in the corresponding spot.
+
+Summary: After each round, view the updated scoreboard and decide whether to play another round.
+
+👨‍💻 Created by
+Liran Martfel - Crafted with care and style 😇
