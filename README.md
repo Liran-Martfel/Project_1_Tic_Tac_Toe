@@ -1,85 +1,73 @@
-🎮 משחק איקס-עיגול (Tic-Tac-Toe) ב-Python
-פרויקט ה-איקס-עיגול שלי הוא שילוב של לוגיקת תכנות קלאסית עם חוויית משתמש (UI) מודרנית בתוך הטרמינל. המשחק נבנה כדי להעניק חוויה זורמת, צבעונית ואינטראקטיבית, תוך שימוש באנימציות וניהול תוצאות חכם.
+הנה גרסה מעוצבת, נקייה ומקצועית שמשלבת את שתי השפות בצורה הרמונית. השתמשתי בכותרות ברורות, קווים מפרידים (Horizontal Rules) ורשימות מרווחות כדי להפוך את הקריאה לנעימה ומזמינה.
+
+🎮 Tic-Tac-Toe Python Project | פרויקט איקס-עיגול
+Hebrew Version | גרסה בעברית
+פרויקט ה-איקס-עיגול שלי משלב לוגיקת תכנות קלאסית עם חוויית משתמש (UI) מודרנית בתוך הטרמינל. המשחק נבנה כדי להעניק חוויה זורמת, צבעונית ואינטראקטיבית, תוך שימוש באנימציות וניהול תוצאות חכם.
 
 ✨ מה מיוחד במשחק הזה?
-🎨 עיצוב ויזואלי בולט: שימוש בצבעים (ANSI) להפרדה בין שחקנים והדגשת הודעות מערכת, מה שהופך את הלוח לקריא ומהנה.
+🎨 עיצוב ויזואלי בולט: שימוש בצבעי ANSI להפרדה בין שחקנים והדגשת הודעות מערכת.
 
 👥 משחק חברתי: תמיכה מלאה בשני שחקנים עם שמות מותאמים אישית ומעקב ניצחונות.
 
-📊 ניהול תוצאות רציף: המערכת עוקבת אחרי ניקוד מצטבר וכמות תוצאות התיקו לאורך כל זמן ההרצה.
+📊 ניהול תוצאות רציף: המערכת עוקבת אחרי ניקוד מצטבר וכמות תוצאות התיקו.
 
-💡 לוגיקת "סוף משחק" חכמה: זיהוי מצבי תיקו בלתי נמנעים והצעה לאתחול הלוח כדי לשמור על קצב משחק מהיר.
+💡 לוגיקת "סוף משחק" חכמה: זיהוי מצבי תיקו בלתי נמנעים והצעה לאתחול הלוח לשימור קצב המשחק.
 
-🎬 מערכת אנימציות מתקדמת: המשחק משלב אפקטים ויזואליים שמעניקים לו תחושה דינמית ומקצועית.
+🎬 מערכת אנימציות מתקדמת: אפקטים ויזואליים שמעניקים למשחק תחושה דינמית ומקצועית.
 
-📂 מבנה המודולים והאנימציות
-הפרויקט מחולק למספר חלקים כדי לשמור על סדר וסטייל:
+📂 מבנה המודולים
+TIC_TAC_TOE.py: הקובץ הראשי – מכיל את הלוגיקה, ניהול התורות ובדיקות הניצחון.
 
-TIC_TAC_TOE.py: הקובץ הראשי והלב של המשחק – מכיל את הלוגיקה, ניהול התורות ובדיקות הניצחון.
+animation.py: המודול האחראי על הפן הוויזואלי, הכולל:
 
-animation.py: המודול האחראי על כל הפן הוויזואלי. המודול כולל:
+animation_by_myself: אנימציות בעיצוב ידני עם דגש על תזמון וחוויה אישית.
 
-animation_by_myself: אנימציות שנכתבו ועוצבו ידנית על ידי, תוך דגש על תזמונים מדויקים וחוויית משתמש אישית.
-
-animation_by_ai: אלמנטים ויזואליים שנוצרו בשילוב כלי AI, המעניקים למשחק מראה מתקדם ומלוטש.
+animation_by_ai: אלמנטים ויזואליים שנוצרו בשילוב כלי AI למראה מלוטש.
 
 🕹️ איך משחקים?
-הרצה: פשוט מריצים את הקובץ:
+הרצה: הריצו את הפקודה python TIC_TAC_TOE.py.
 
-Bash
-python TIC_TAC_TOE.py
-הזדהות: מכניסים את שמות השחקנים ונהנים מאנימציית הפתיחה.
+הזדהות: מכניסים שמות ונהנים מאנימציית הפתיחה.
 
-בחירת צד: בוחרים מי יהיה X ומי יהיה O.
+בחירת צד: בוחרים בין X ל-O.
 
-ביצוע מהלכים: הלוח ממוספר 1-9. בוחרים מספר, והסימן שלכם יופיע במקום המתאים.
+ביצוע מהלכים: הלוח ממוספר 1-9. בוחרים מספר והסימן יופיע במיקום.
 
-סיכום: בסוף כל סבב תוכלו לראות את טבלת התוצאות המעודכנת ולהחליט אם להמשיך לסיבוב נוסף.
+סיכום: בסוף כל סבב תוצג טבלת התוצאות המעודכנת.
 
-👨‍💻 נוצר על ידי
-לירן מרטפל (Liran Martfel) - נבנה עם המון מחשבה וסטייל 😇
-
-
-
-Certainly! Here is the professional English version of your README, maintaining the same structure and style:
-
-🎮 Python Tic-Tac-Toe (X-O) Game
-This Tic-Tac-Toe project blends classic programming logic with a modern User Interface (UI) right in the terminal. The game was designed to provide a smooth, colorful, and interactive experience, featuring advanced animations and smart score management.
+English Version | גרסה באנגלית
+This Tic-Tac-Toe project blends classic programming logic with a modern User Interface (UI) right in the terminal. The game provides a smooth, colorful, and interactive experience featuring advanced animations and smart score management.
 
 ✨ Key Features
-🎨 Vibrant Visual Design: Utilizes ANSI color codes to distinguish between players and highlight system messages, making the board clear and engaging.
+🎨 Vibrant Visual Design: Utilizes ANSI color codes to distinguish between players and highlight system messages.
 
 👥 Social Gameplay: Full support for two players with customizable names and win-tracking.
 
-📊 Continuous Score Tracking: The system tracks cumulative wins for each player and the total number of draws throughout the entire session.
+📊 Continuous Score Tracking: Tracks cumulative wins for each player and the total number of draws.
 
-💡 Smart "End Game" Logic: Automatically detects inevitable draw scenarios and suggests a board reset to keep the game pace fast.
+💡 Smart "End Game" Logic: Automatically detects inevitable draw scenarios and suggests a board reset.
 
-🎬 Advanced Animation System: Integrated visual effects that give the game a dynamic and professional feel.
+🎬 Advanced Animation System: Integrated visual effects for a dynamic and professional feel.
 
-📂 Project Structure & Animations
-The project is modularized to maintain organization and style:
+📂 Project Structure
+TIC_TAC_TOE.py: The main executable – contains the core logic, turn management, and win-checks.
 
-TIC_TAC_TOE.py: The main executable and the heart of the game – contains the core logic, turn management, and win-condition checks.
+animation.py: The module responsible for the visual aspect, including:
 
-animation.py: The module responsible for the entire visual aspect. It includes:
+animation_by_myself: Handcrafted animations with a focus on timing and UX.
 
-animation_by_myself: Handcrafted animations designed by me, focusing on precise timing and a personal user experience.
-
-animation_by_ai: Visual elements enhanced using AI tools, giving the game a sophisticated and polished look.
+animation_by_ai: Visual elements enhanced using AI tools for a polished look.
 
 🕹️ How to Play
-Launch: Simply run the main file:
+Launch: Run the command python TIC_TAC_TOE.py.
 
-Bash
-python TIC_TAC_TOE.py
-Identify: Enter player names and enjoy the opening animation sequence.
+Identify: Enter player names and enjoy the opening animation.
 
 Pick a Side: Choose whether you want to be X or O.
 
-Make Moves: The board is numbered 1-9. Enter a number, and your mark will appear in the corresponding spot.
+Make Moves: The board is numbered 1-9. Enter a number to place your mark.
 
-Summary: After each round, view the updated scoreboard and decide whether to play another round.
+Summary: View the updated scoreboard after each round.
 
-👨‍💻 Created by
-Liran Martfel - Crafted with care and style 😇
+👨‍💻 Created by | נוצר על ידי
+Liran Martfel (לירן מרטפל) Crafted with care and style | נבנה עם המון מחשבה וסטייל 😇
