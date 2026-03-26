@@ -1,5 +1,4 @@
-🎮 Tic-Tac-Toe Python Project | פרויקט איקס-עיגול
-גרסה בעברית | Hebrew Version
+גרסה בעברית
 פרויקט ה-איקס-עיגול שלי משלב לוגיקת תכנות קלאסית עם חוויית משתמש (UI) מודרנית בתוך הטרמינל. המשחק נבנה כדי להעניק חוויה זורמת, צבעונית ואינטראקטיבית, תוך שימוש באנימציות וניהול תוצאות חכם.
 
 ✨ מה מיוחד במשחק הזה?
@@ -31,7 +30,7 @@ animation_by_ai: אלמנטים ויזואליים שנוצרו בשילוב כ�
 
 ביצוע מהלכים: הלוח ממוספר 1-9. בוחרים מספר והסימן יופיע במיקום המתאים.
 
-English Version | גרסה באנגלית
+English Version
 This Tic-Tac-Toe project blends classic programming logic with a modern User Interface (UI) right in the terminal. The game provides a smooth, colorful, and interactive experience featuring advanced animations and smart score management.
 
 ✨ Key Features
@@ -63,6 +62,6 @@ Pick a Side: Choose whether you want to be X or O.
 
 Make Moves: The board is numbered 1-9. Enter a number to place your mark.
 
-👨‍💻 Created by | נוצר על ידי
-Liran Martfel (לירן מרטפל)
-Crafted with care and style | נבנה עם המון מחשבה וסטייל 😇
+👨‍💻 Created by
+Liran Martfel
+Crafted with care and style 😇
